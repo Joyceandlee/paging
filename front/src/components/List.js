@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Pagedata from './Pagedata';
+
 import { Pagination } from 'antd';
+
+
 
 export default class List extends Component {
     state = {
@@ -10,9 +13,7 @@ export default class List extends Component {
         list: []
     }
     componentDidMount() {
-        console.log(this.state)
         const { limit, curpage } = this.state;
-  
         fetch(`/getList?limit=${limit}&curpage=${curpage}`)
             .then(res => res.json())
             .then(data => {
@@ -34,16 +35,14 @@ export default class List extends Component {
     //页码改变的回调
     onchange(curpage, limit) {
         console.log(curpage, limit)
-        if (curpage > this.state.curpage) {
-            fetch(`/getList?limit=${limit}&curpage=${curpage}`)
-                .then(res => res.json())
-                .then(data => {
-                    this.setState({
-                        list: data.list
-                    })
-                })
-        }
 
+        fetch(`/getList?limit=${limit}&curpage=${curpage}`)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    list: data.list
+                })
+            })
     }
 
 }

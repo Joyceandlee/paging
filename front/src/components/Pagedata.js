@@ -1,3 +1,9 @@
+/*
+ * @Author: up 
+ * @Date: 2019-09-18 19:23:13 
+ * @Last Modified by:   up 
+ * @Last Modified time: 2019-09-18 19:23:13 
+ */
 import React, { Component } from 'react'
 import { Table } from 'antd';
 let dataSource = [];
@@ -28,13 +34,16 @@ export default class Pagedata extends Component {
     }
     render() {
         if (this.props.list.length !== 0) {
-            dataSource = this.props.list
+            dataSource = this.props.list;
+            //对数据进行处理 加入key的键值对
+            dataSource.map((item, index) => {
+                return item.key = JSON.stringify(item.id)
+            })
         }
-        // this.props.list.length !== 0 ? dataSource = this.props.list : [];
         return (
             <div>
                 {
-                    dataSource.length && <Table dataSource={dataSource} columns={this.state.columns} rowkey="id" />
+                    dataSource.length && <Table dataSource={dataSource} columns={this.state.columns} />
                 }
             </div>
         )
